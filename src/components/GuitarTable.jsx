@@ -41,6 +41,7 @@ function GuitarTable({
 
   const table = useReactTable({
     data: guitars,
+
     columns: columns,
 
     initialState: {
@@ -62,32 +63,44 @@ function GuitarTable({
       <section
         className={styles.empty}
       >
+        <div
+          className={
+            styles.emptyIcon
+          }
+        >
+          🎸
+        </div>
+
+        <span>
+          MICO GUITAR STORE
+        </span>
+
         <h2>Guitar Inventory</h2>
 
         <p>
-          No guitar records to display.
+          No guitar records to
+          display yet.
         </p>
       </section>
     );
   }
 
   return (
-    <section
-      className={styles.card}
-    >
-      <div
-        className={styles.header}
-      >
+    <section className={styles.card}>
+      <div className={styles.header}>
         <div>
-          <span>REGISTRY TABLE</span>
+          <span>INVENTORY RECORDS</span>
 
           <h2>Guitar Inventory</h2>
+
+          <p>
+            Click a guitar row to
+            view its complete profile.
+          </p>
         </div>
 
-        <div
-          className={styles.count}
-        >
-          {guitars.length} Guitar(s)
+        <div className={styles.count}>
+          🎸 {guitars.length} Guitar(s)
         </div>
       </div>
 
@@ -104,18 +117,23 @@ function GuitarTable({
               .getHeaderGroups()
               .map((headerGroup) => (
                 <tr
-                  key={headerGroup.id}
+                  key={
+                    headerGroup.id
+                  }
                 >
                   {headerGroup.headers.map(
                     (header) => (
                       <th
-                        key={header.id}
+                        key={
+                          header.id
+                        }
                       >
                         {flexRender(
                           header
                             .column
                             .columnDef
                             .header,
+
                           header.getContext()
                         )}
                       </th>
@@ -157,13 +175,16 @@ function GuitarTable({
                       .getVisibleCells()
                       .map((cell) => (
                         <td
-                          key={cell.id}
+                          key={
+                            cell.id
+                          }
                         >
                           {flexRender(
                             cell
                               .column
                               .columnDef
                               .cell,
+
                             cell.getContext()
                           )}
                         </td>
@@ -176,8 +197,8 @@ function GuitarTable({
       </div>
 
       <div className={styles.help}>
-        Click a guitar row to view
-        its complete profile.
+        Select a row to view its
+        active guitar profile.
       </div>
 
       <div

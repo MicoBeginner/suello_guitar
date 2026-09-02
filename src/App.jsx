@@ -95,23 +95,41 @@ function App() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <div>
-          <span>
-            REACT MIDTERM PRACTICAL
-          </span>
+        <div className={styles.heroContent}>
+          <div className={styles.brandRow}>
+            <div className={styles.guitarIcon}>
+              🎸
+            </div>
 
-          <h1>
-            Guitar Store Inventory Manager
-          </h1>
+            <div>
+              <span className={styles.heroLabel}>
+                MICO GUITAR STORE
+              </span>
+
+              <h1>
+                Mico Guitar Store
+                <br />
+                Inventory Manager
+              </h1>
+            </div>
+          </div>
 
           <p>
             Manage guitar information,
-            inventory, and store records.
+            inventory, stock, and store
+            records in one place.
           </p>
+
+          <div className={styles.heroTags}>
+            <span>GUITARS</span>
+            <span>INVENTORY</span>
+            <span>SET B</span>
+          </div>
         </div>
 
         <div className={styles.badge}>
-          SET B
+          REACT
+          <small> MIDTERM</small>
         </div>
       </section>
 
@@ -119,15 +137,9 @@ function App() {
         onAddGuitar={handleAddGuitar}
       />
 
-      <section
-        className={styles.filterCard}
-      >
+      <section className={styles.filterCard}>
         <div>
-          <span
-            className={
-              styles.filterLabel
-            }
-          >
+          <span className={styles.filterLabel}>
             INVENTORY FILTER
           </span>
 
@@ -139,11 +151,7 @@ function App() {
           </p>
         </div>
 
-        <div
-          className={
-            styles.filterButtons
-          }
-        >
+        <div className={styles.filterButtons}>
           <button
             type="button"
             className={getFilterButtonClass(
@@ -182,11 +190,7 @@ function App() {
         </div>
       </section>
 
-      <div
-        className={
-          styles.resultSummary
-        }
-      >
+      <div className={styles.resultSummary}>
         Showing{" "}
         <strong>
           {filteredGuitars.length}
@@ -200,24 +204,24 @@ function App() {
 
       <GuitarTable
         guitars={filteredGuitars}
-        selectedGuitar={
-          selectedGuitar
-        }
-        onSelectGuitar={
-          handleSelectGuitar
-        }
+        selectedGuitar={selectedGuitar}
+        onSelectGuitar={handleSelectGuitar}
       />
 
       <ActiveGuitar
         guitar={activeGuitar}
       />
 
-      <footer
-        className={styles.footer}
-      >
-        <strong>
-          Guitar Store Inventory Manager
-        </strong>
+      <footer className={styles.footer}>
+        <div>
+          <strong>
+            Mico Guitar Store
+          </strong>
+
+          <p>
+            Inventory Manager
+          </p>
+        </div>
 
         <span>
           React Midterm Practical • SET B

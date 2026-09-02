@@ -6,6 +6,14 @@ function ActiveGuitar({ guitar }) {
       <section
         className={styles.emptyCard}
       >
+        <div
+          className={
+            styles.emptyIcon
+          }
+        >
+          🎸
+        </div>
+
         <span>
           ACTIVE ITEM PROFILE
         </span>
@@ -24,25 +32,23 @@ function ActiveGuitar({ guitar }) {
   let roleBadgeClass =
     styles.consumerBadge;
 
-  if (guitar.userRole === "Merchant") {
+  if (
+    guitar.userRole === "Merchant"
+  ) {
     roleBadgeClass =
       styles.merchantBadge;
   }
 
   return (
-    <section
-      className={styles.card}
-    >
-      <div
-        className={styles.header}
-      >
+    <section className={styles.card}>
+      <div className={styles.header}>
         <div>
           <span>
-            ACTIVE ITEM PROFILE
+            ACTIVE GUITAR PROFILE
           </span>
 
           <h2>
-            {guitar.guitarModel}
+            🎸 {guitar.guitarModel}
           </h2>
 
           <p>
@@ -58,12 +64,8 @@ function ActiveGuitar({ guitar }) {
         </div>
       </div>
 
-      <div
-        className={styles.details}
-      >
-        <div
-          className={styles.detail}
-        >
+      <div className={styles.details}>
+        <div className={styles.detail}>
           <span>Guitar Model</span>
 
           <strong>
@@ -71,9 +73,7 @@ function ActiveGuitar({ guitar }) {
           </strong>
         </div>
 
-        <div
-          className={styles.detail}
-        >
+        <div className={styles.detail}>
           <span>Body Type</span>
 
           <strong>
@@ -81,9 +81,7 @@ function ActiveGuitar({ guitar }) {
           </strong>
         </div>
 
-        <div
-          className={styles.detail}
-        >
+        <div className={styles.detail}>
           <span>Brand Name</span>
 
           <strong>
@@ -91,9 +89,7 @@ function ActiveGuitar({ guitar }) {
           </strong>
         </div>
 
-        <div
-          className={styles.detail}
-        >
+        <div className={styles.detail}>
           <span>Stock Quantity</span>
 
           <strong>
@@ -101,9 +97,7 @@ function ActiveGuitar({ guitar }) {
           </strong>
         </div>
 
-        <div
-          className={styles.detail}
-        >
+        <div className={styles.detail}>
           <span>
             Manufacturer Name
           </span>
@@ -113,9 +107,7 @@ function ActiveGuitar({ guitar }) {
           </strong>
         </div>
 
-        <div
-          className={styles.detail}
-        >
+        <div className={styles.detail}>
           <span>User Role</span>
 
           <strong>

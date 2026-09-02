@@ -1,161 +1,278 @@
 .card {
   width: 100%;
   max-width: 1100px;
+
   margin: 30px auto 0;
+
   overflow: hidden;
+
   background: #ffffff;
-  border: 1px solid #ded8ce;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  border: 1px solid #d7e3ee;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 30px
+    rgba(13, 52, 84, 0.08);
 }
 
 .header {
-  padding: 22px 26px;
+  padding: 24px 28px;
+
   display: flex;
+
   justify-content: space-between;
   align-items: center;
+
   gap: 20px;
-  background: #29231e;
+
+  background:
+    linear-gradient(
+      120deg,
+      #0c2c47,
+      #104d78
+    );
+
   color: #ffffff;
 }
 
 .header span {
-  color: #e7b76a;
-  font-size: 11px;
+  color: #65baff;
+
+  font-size: 10px;
+
   font-weight: bold;
+
   letter-spacing: 2px;
 }
 
 .header h2 {
-  margin: 5px 0 0;
+  margin: 5px 0 4px;
+
+  font-size: 23px;
+}
+
+.header p {
+  margin: 0;
+
+  color: #c8dceb;
+
+  font-size: 12px;
 }
 
 .count {
-  padding: 8px 12px;
-  background: #40372f;
-  color: #e7b76a;
+  padding: 9px 13px;
+
+  background:
+    rgba(255, 255, 255, 0.1);
+
+  color: #c9e9ff;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
   border-radius: 8px;
-  font-size: 13px;
+
+  font-size: 12px;
+
   font-weight: bold;
+
   white-space: nowrap;
 }
 
 .tableWrapper {
   width: 100%;
+
   overflow-x: auto;
 }
 
 .table {
   width: 100%;
+
   border-collapse: collapse;
 }
 
 .table th,
 .table td {
   padding: 15px 18px;
+
   text-align: left;
-  border-bottom: 1px solid #eee9e3;
+
+  border-bottom:
+    1px solid #e5edf4;
 }
 
 .table th {
-  background: #faf8f5;
-  color: #6c6258;
-  font-size: 12px;
+  background: #edf5fb;
+
+  color: #45627a;
+
+  font-size: 11px;
+
   text-transform: uppercase;
+
   white-space: nowrap;
+
+  letter-spacing: 0.5px;
 }
 
 .table td {
-  color: #342d27;
+  color: #183750;
+
   font-size: 14px;
 }
 
 .table tbody tr {
   cursor: pointer;
+
   transition:
     background 0.2s,
     box-shadow 0.2s;
 }
 
 .table tbody tr:hover {
-  background: #fff7ed;
+  background: #f2f8fd;
 }
 
 .selectedRow {
-  background: #f5e6d3 !important;
-  box-shadow: inset 4px 0 0 #a96f2d;
+  background: #e3f2ff !important;
+
+  box-shadow:
+    inset 4px 0 0
+    #1687e8;
 }
 
 .help {
-  padding: 10px 20px 0;
-  color: #8a7d70;
-  font-size: 12px;
+  padding: 12px 20px 0;
+
+  color: #788da0;
+
+  font-size: 11px;
+
   text-align: center;
 }
 
 .pagination {
   padding: 16px 22px 20px;
+
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   gap: 16px;
 }
 
 .pagination button {
-  padding: 9px 15px;
-  background: #a96f2d;
+  padding: 9px 16px;
+
+  background: #1687e8;
+
   color: #ffffff;
+
   border: none;
-  border-radius: 7px;
+
+  border-radius: 8px;
+
   font-weight: bold;
+
   cursor: pointer;
 }
 
-.pagination button:hover:not(:disabled) {
-  background: #8f5c24;
+.pagination button:hover:not(
+    :disabled
+  ) {
+  background: #086bc1;
 }
 
 .pagination button:disabled {
-  background: #cfc7bd;
+  background: #c6d4df;
+
+  color: #ffffff;
+
   cursor: not-allowed;
 }
 
 .pagination span {
-  color: #746a60;
-  font-size: 13px;
+  color: #607a90;
+
+  font-size: 12px;
+
   font-weight: bold;
 }
 
 .empty {
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
+
   margin: 30px auto 0;
-  padding: 30px;
+  padding: 40px 30px;
+
   text-align: center;
+
   background: #ffffff;
-  border: 1px dashed #cfc7bd;
-  border-radius: 14px;
+
+  border:
+    1px dashed #bdcfdd;
+
+  border-radius: 18px;
+}
+
+.emptyIcon {
+  width: 67px;
+  height: 67px;
+
+  margin: 0 auto 14px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #e7f3fc;
+
+  border-radius: 50%;
+
+  font-size: 31px;
+}
+
+.empty > span {
+  color: #1687e8;
+
+  font-size: 9px;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
 }
 
 .empty h2 {
-  margin: 0 0 8px;
-  color: #29231e;
+  margin: 7px 0;
+
+  color: #123650;
 }
 
 .empty p {
   margin: 0;
-  color: #746a60;
-  font-size: 14px;
+
+  color: #788da0;
+
+  font-size: 13px;
 }
 
 @media (max-width: 650px) {
   .header {
     align-items: flex-start;
+
+    flex-direction: column;
   }
 
   .table th,
   .table td {
     padding: 12px;
+
     white-space: nowrap;
   }
 
