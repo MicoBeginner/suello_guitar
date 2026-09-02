@@ -9,7 +9,7 @@ import styles from "./GuitarTable.module.css";
 
 function GuitarTable({
   guitars,
-  selectedGuitar,
+  selectedId,
   onSelectGuitar,
 }) {
   const columns = [
@@ -41,7 +41,7 @@ function GuitarTable({
 
   const table = useReactTable({
     data: guitars,
-    columns: columns,
+    columns,
 
     initialState: {
       pagination: {
@@ -72,6 +72,7 @@ function GuitarTable({
       <div className={styles.header}>
         <div>
           <span>REGISTRY TABLE</span>
+
           <h2>Guitar Inventory</h2>
         </div>
 
@@ -92,8 +93,7 @@ function GuitarTable({
                     (header) => (
                       <th key={header.id}>
                         {flexRender(
-                          header.column.columnDef
-                            .header,
+                          header.column.columnDef.header,
                           header.getContext()
                         )}
                       </th>
@@ -104,71 +104,63 @@ function GuitarTable({
           </thead>
 
           <tbody>
-            {table
-              .getRowModel()
-              .rows.map((row) => {
-                const isSelected =
-                  selectedGuitar?.id ===
-                  row.original.id;
+            {table.getRowModel().rows.map((row) => {
+              const isSelected =
+                selectedId === row.original.id;
 
-                return (
-                  <tr
-                    key={row.id}
-                    className={
-                      isSelected
-                        ? styles.selectedRow
-                        : ""
-                    }
-                    onClick={() =>
-                      onSelectGuitar(
-                        row.original
-                      )
-                    }
-                  >
-                    {row
-                      .getVisibleCells()
-                      .map((cell) => (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef
-                              .cell,
-                            cell.getContext()
-                          )}
-                        </td>
-                      ))}
-                  </tr>
-                );
-              })}
+              return (
+                <tr
+                  key={row.id}
+                  className={
+                    isSelected
+                      ? styles.selectedRow
+                      : ""
+                  }
+                  onClick={() =>
+                    onSelectGuitar(row.original.id)
+                  }
+                >
+                  {row
+                    .getVisibleCells()
+                    .map((cell) => (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
+      </div>
+
+      <div className={styles.help}>
+        Click any guitar row to view its full profile.
       </div>
 
       <div className={styles.pagination}>
         <button
           type="button"
-          onClick={() =>
-            table.previousPage()
-          }
-          disabled={
-            !table.getCanPreviousPage()
-          }
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
         >
           Previous
         </button>
 
         <span>
           Page{" "}
-          {table.getState().pagination
-            .pageIndex + 1}{" "}
-          of {table.getPageCount()}
+          {table.getState().pagination.pageIndex + 1}
+          {" "}of{" "}
+          {table.getPageCount()}
         </span>
 
         <button
           type="button"
           onClick={() => table.nextPage()}
-          disabled={
-            !table.getCanNextPage()
-          }
+          disabled={!table.getCanNextPage()}
         >
           Next
         </button>

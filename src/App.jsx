@@ -1,7 +1,11 @@
-import { useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
 import GuitarForm from "./components/GuitarForm";
 import GuitarTable from "./components/GuitarTable";
+import ActiveGuitar from "./components/ActiveGuitar";
 
 import styles from "./App.module.css";
 
@@ -9,7 +13,10 @@ function App() {
   const [guitars, setGuitars] =
     useState([]);
 
-  const [selectedGuitar, setSelectedGuitar] =
+  const [selectedId, setSelectedId] =
+    useState(null);
+
+  const [activeGuitar, setActiveGuitar] =
     useState(null);
 
   const handleAddGuitar = (newGuitar) => {
@@ -19,9 +26,26 @@ function App() {
     ]);
   };
 
-  const handleSelectGuitar = (guitar) => {
-    setSelectedGuitar(guitar);
+  const handleSelectGuitar = (guitarId) => {
+    setSelectedId(guitarId);
   };
+
+  useEffect(() => {
+    if (selectedId === null) {
+      setActiveGuitar(null);
+      return;
+    }
+
+    const selectedGuitar = guitars.find(
+      (guitar) => guitar.id === selectedId
+    );
+
+    if (selectedGuitar) {
+      setActiveGuitar(selectedGuitar);
+    } else {
+      setActiveGuitar(null);
+    }
+  }, [selectedId, guitars]);
 
   return (
     <main className={styles.page}>
@@ -52,34 +76,13 @@ function App() {
 
       <GuitarTable
         guitars={guitars}
-        selectedGuitar={selectedGuitar}
-        onSelectGuitar={
-          handleSelectGuitar
-        }
+        selectedId={selectedId}
+        onSelectGuitar={handleSelectGuitar}
       />
 
-      {selectedGuitar && (
-        <section
-          className={
-            styles.selectedPreview
-          }
-        >
-          <span>SELECTED GUITAR</span>
-
-          <strong>
-            {selectedGuitar.guitarModel}
-          </strong>
-
-          <p>
-            {selectedGuitar.brandName} •{" "}
-            {selectedGuitar.bodyType} •
-            Stock:{" "}
-            {
-              selectedGuitar.stockQuantity
-            }
-          </p>
-        </section>
-      )}
+      <ActiveGuitar
+        guitar={activeGuitar}
+      />
     </main>
   );
 }

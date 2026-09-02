@@ -72,7 +72,9 @@
 
 .table tbody tr {
   cursor: pointer;
-  transition: background 0.2s;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
 }
 
 .table tbody tr:hover {
@@ -81,10 +83,18 @@
 
 .selectedRow {
   background: #f5e6d3 !important;
+  box-shadow: inset 4px 0 0 #a96f2d;
+}
+
+.help {
+  padding: 10px 20px 0;
+  color: #8a7d70;
+  font-size: 12px;
+  text-align: center;
 }
 
 .pagination {
-  padding: 18px 22px;
+  padding: 16px 22px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,7 +117,6 @@
 
 .pagination button:disabled {
   background: #cfc7bd;
-  color: #ffffff;
   cursor: not-allowed;
 }
 
@@ -152,9 +161,5 @@
 
   .pagination {
     gap: 8px;
-  }
-
-  .pagination button {
-    padding: 8px 10px;
   }
 }
