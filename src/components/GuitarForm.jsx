@@ -2,145 +2,191 @@ import { useState } from "react";
 import styles from "./GuitarForm.module.css";
 
 function GuitarForm({ onAddGuitar }) {
-  const [formData, setFormData] = useState({
-    guitarModel: "",
-    bodyType: "",
-    brandName: "",
-    stockQuantity: "",
-    manufacturerName: "",
-    userRole: "",
-  });
+  const [guitarModel, setGuitarModel] = useState("");
+  const [bodyType, setBodyType] = useState("");
+  const [brandName, setBrandName] = useState("");
+  const [stockQuantity, setStockQuantity] = useState("");
+  const [manufacturerName, setManufacturerName] = useState("");
+  const [userRole, setUserRole] = useState("");
 
-  const [errors, setErrors] = useState({});
+  const [guitarModelError, setGuitarModelError] = useState("");
+  const [bodyTypeError, setBodyTypeError] = useState("");
+  const [brandNameError, setBrandNameError] = useState("");
+  const [stockQuantityError, setStockQuantityError] = useState("");
+  const [manufacturerError, setManufacturerError] = useState("");
+  const [userRoleError, setUserRoleError] = useState("");
+
   const [successMessage, setSuccessMessage] = useState("");
 
-  const validateField = (name, value) => {
-    let error = "";
-
-    if (name === "guitarModel") {
-      if (value.trim() === "") {
-        error = "Guitar model is required.";
-      } else if (value.trim().length < 3) {
-        error = "Guitar model must be at least 3 characters.";
-      }
-    } else if (name === "bodyType") {
-      if (value === "") {
-        error = "Please select a body type.";
-      }
-    } else if (name === "brandName") {
-      if (value.trim() === "") {
-        error = "Brand name is required.";
-      }
-    } else if (name === "stockQuantity") {
-      if (value === "") {
-        error = "Stock quantity is required.";
-      } else if (Number(value) < 1 || Number(value) > 100) {
-        error = "Stock quantity must be between 1 and 100.";
-      }
-    } else if (name === "manufacturerName") {
-      if (value.trim() === "") {
-        error = "Manufacturer name is required.";
-      }
-    } else if (name === "userRole") {
-      if (value === "") {
-        error = "Please select a user role.";
-      }
+  const validateGuitarModel = (value) => {
+    if (value.trim() === "") {
+      return "Guitar model is required.";
     }
 
-    return error;
+    if (value.trim().length < 3) {
+      return "Guitar model must be at least 3 characters.";
+    }
+
+    return "";
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const validateBodyType = (value) => {
+    if (value === "") {
+      return "Please select a body type.";
+    }
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    return "";
+  };
 
-    setErrors({
-      ...errors,
-      [name]: validateField(name, value),
-    });
+  const validateBrandName = (value) => {
+    if (value.trim() === "") {
+      return "Brand name is required.";
+    }
 
+    return "";
+  };
+
+  const validateStockQuantity = (value) => {
+    if (value === "") {
+      return "Stock quantity is required.";
+    }
+
+    if (Number(value) < 1 || Number(value) > 100) {
+      return "Stock quantity must be between 1 and 100.";
+    }
+
+    return "";
+  };
+
+  const validateManufacturer = (value) => {
+    if (value.trim() === "") {
+      return "Manufacturer name is required.";
+    }
+
+    return "";
+  };
+
+  const validateUserRole = (value) => {
+    if (value === "") {
+      return "Please select a user role.";
+    }
+
+    return "";
+  };
+
+  const handleGuitarModelChange = (event) => {
+    const value = event.target.value;
+
+    setGuitarModel(value);
+    setGuitarModelError(validateGuitarModel(value));
     setSuccessMessage("");
   };
 
-  const validateForm = () => {
-    const newErrors = {
-      guitarModel: validateField(
-        "guitarModel",
-        formData.guitarModel
-      ),
-      bodyType: validateField(
-        "bodyType",
-        formData.bodyType
-      ),
-      brandName: validateField(
-        "brandName",
-        formData.brandName
-      ),
-      stockQuantity: validateField(
-        "stockQuantity",
-        formData.stockQuantity
-      ),
-      manufacturerName: validateField(
-        "manufacturerName",
-        formData.manufacturerName
-      ),
-      userRole: validateField(
-        "userRole",
-        formData.userRole
-      ),
-    };
+  const handleBodyTypeChange = (event) => {
+    const value = event.target.value;
 
-    setErrors(newErrors);
+    setBodyType(value);
+    setBodyTypeError(validateBodyType(value));
+    setSuccessMessage("");
+  };
 
-    return !Object.values(newErrors).some(
-      (error) => error !== ""
-    );
+  const handleBrandNameChange = (event) => {
+    const value = event.target.value;
+
+    setBrandName(value);
+    setBrandNameError(validateBrandName(value));
+    setSuccessMessage("");
+  };
+
+  const handleStockQuantityChange = (event) => {
+    const value = event.target.value;
+
+    setStockQuantity(value);
+    setStockQuantityError(validateStockQuantity(value));
+    setSuccessMessage("");
+  };
+
+  const handleManufacturerChange = (event) => {
+    const value = event.target.value;
+
+    setManufacturerName(value);
+    setManufacturerError(validateManufacturer(value));
+    setSuccessMessage("");
+  };
+
+  const handleUserRoleChange = (event) => {
+    const value = event.target.value;
+
+    setUserRole(value);
+    setUserRoleError(validateUserRole(value));
+    setSuccessMessage("");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (validateForm()) {
-      const newGuitar = {
-        id: Date.now(),
-        guitarModel: formData.guitarModel,
-        bodyType: formData.bodyType,
-        brandName: formData.brandName,
-        stockQuantity: Number(formData.stockQuantity),
-        manufacturerName: formData.manufacturerName,
-        userRole: formData.userRole,
-      };
+    const modelError = validateGuitarModel(guitarModel);
+    const typeError = validateBodyType(bodyType);
+    const brandError = validateBrandName(brandName);
+    const stockError = validateStockQuantity(stockQuantity);
+    const manufacturerNameError =
+      validateManufacturer(manufacturerName);
+    const roleError = validateUserRole(userRole);
 
-      onAddGuitar(newGuitar);
+    setGuitarModelError(modelError);
+    setBodyTypeError(typeError);
+    setBrandNameError(brandError);
+    setStockQuantityError(stockError);
+    setManufacturerError(manufacturerNameError);
+    setUserRoleError(roleError);
 
-      setSuccessMessage(
-        "Guitar registered successfully."
-      );
-
-      setFormData({
-        guitarModel: "",
-        bodyType: "",
-        brandName: "",
-        stockQuantity: "",
-        manufacturerName: "",
-        userRole: "",
-      });
-
-      setErrors({});
-    } else {
+    if (
+      modelError !== "" ||
+      typeError !== "" ||
+      brandError !== "" ||
+      stockError !== "" ||
+      manufacturerNameError !== "" ||
+      roleError !== ""
+    ) {
       setSuccessMessage("");
+      return;
     }
+
+    const newGuitar = {
+      guitarModel: guitarModel,
+      bodyType: bodyType,
+      brandName: brandName,
+      stockQuantity: Number(stockQuantity),
+      manufacturerName: manufacturerName,
+      userRole: userRole,
+    };
+
+    onAddGuitar(newGuitar);
+
+    setSuccessMessage("Guitar registered successfully.");
+
+    setGuitarModel("");
+    setBodyType("");
+    setBrandName("");
+    setStockQuantity("");
+    setManufacturerName("");
+    setUserRole("");
+
+    setGuitarModelError("");
+    setBodyTypeError("");
+    setBrandNameError("");
+    setStockQuantityError("");
+    setManufacturerError("");
+    setUserRoleError("");
   };
 
   return (
     <section className={styles.card}>
       <div className={styles.header}>
         <span>SET B</span>
+
         <h2>Register Guitar</h2>
+
         <p>Enter the guitar information below.</p>
       </div>
 
@@ -156,16 +202,15 @@ function GuitarForm({ onAddGuitar }) {
 
           <input
             id="guitarModel"
-            name="guitarModel"
             type="text"
             placeholder="Example: Stratocaster"
-            value={formData.guitarModel}
-            onChange={handleChange}
+            value={guitarModel}
+            onChange={handleGuitarModelChange}
           />
 
-          {errors.guitarModel && (
+          {guitarModelError && (
             <p className={styles.error}>
-              {errors.guitarModel}
+              {guitarModelError}
             </p>
           )}
         </div>
@@ -177,30 +222,33 @@ function GuitarForm({ onAddGuitar }) {
 
           <select
             id="bodyType"
-            name="bodyType"
-            value={formData.bodyType}
-            onChange={handleChange}
+            value={bodyType}
+            onChange={handleBodyTypeChange}
           >
             <option value="">
               Select body type
             </option>
+
             <option value="Electric">
               Electric
             </option>
+
             <option value="Acoustic">
               Acoustic
             </option>
+
             <option value="Bass">
               Bass
             </option>
+
             <option value="Classical">
               Classical
             </option>
           </select>
 
-          {errors.bodyType && (
+          {bodyTypeError && (
             <p className={styles.error}>
-              {errors.bodyType}
+              {bodyTypeError}
             </p>
           )}
         </div>
@@ -212,16 +260,15 @@ function GuitarForm({ onAddGuitar }) {
 
           <input
             id="brandName"
-            name="brandName"
             type="text"
             placeholder="Example: Fender"
-            value={formData.brandName}
-            onChange={handleChange}
+            value={brandName}
+            onChange={handleBrandNameChange}
           />
 
-          {errors.brandName && (
+          {brandNameError && (
             <p className={styles.error}>
-              {errors.brandName}
+              {brandNameError}
             </p>
           )}
         </div>
@@ -233,18 +280,17 @@ function GuitarForm({ onAddGuitar }) {
 
           <input
             id="stockQuantity"
-            name="stockQuantity"
             type="number"
             min="1"
             max="100"
             placeholder="1 - 100"
-            value={formData.stockQuantity}
-            onChange={handleChange}
+            value={stockQuantity}
+            onChange={handleStockQuantityChange}
           />
 
-          {errors.stockQuantity && (
+          {stockQuantityError && (
             <p className={styles.error}>
-              {errors.stockQuantity}
+              {stockQuantityError}
             </p>
           )}
         </div>
@@ -256,16 +302,15 @@ function GuitarForm({ onAddGuitar }) {
 
           <input
             id="manufacturerName"
-            name="manufacturerName"
             type="text"
             placeholder="Example: Fender Musical Instruments"
-            value={formData.manufacturerName}
-            onChange={handleChange}
+            value={manufacturerName}
+            onChange={handleManufacturerChange}
           />
 
-          {errors.manufacturerName && (
+          {manufacturerError && (
             <p className={styles.error}>
-              {errors.manufacturerName}
+              {manufacturerError}
             </p>
           )}
         </div>
@@ -279,11 +324,10 @@ function GuitarForm({ onAddGuitar }) {
                 type="radio"
                 name="userRole"
                 value="Merchant"
-                checked={
-                  formData.userRole === "Merchant"
-                }
-                onChange={handleChange}
+                checked={userRole === "Merchant"}
+                onChange={handleUserRoleChange}
               />
+
               Merchant
             </label>
 
@@ -292,18 +336,17 @@ function GuitarForm({ onAddGuitar }) {
                 type="radio"
                 name="userRole"
                 value="Consumer"
-                checked={
-                  formData.userRole === "Consumer"
-                }
-                onChange={handleChange}
+                checked={userRole === "Consumer"}
+                onChange={handleUserRoleChange}
               />
+
               Consumer
             </label>
           </div>
 
-          {errors.userRole && (
+          {userRoleError && (
             <p className={styles.error}>
-              {errors.userRole}
+              {userRoleError}
             </p>
           )}
         </div>

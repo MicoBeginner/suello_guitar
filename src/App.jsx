@@ -10,10 +10,9 @@ import ActiveGuitar from "./components/ActiveGuitar";
 import styles from "./App.module.css";
 
 function App() {
-  const [guitars, setGuitars] =
-    useState([]);
+  const [guitars, setGuitars] = useState([]);
 
-  const [selectedId, setSelectedId] =
+  const [selectedGuitar, setSelectedGuitar] =
     useState(null);
 
   const [activeGuitar, setActiveGuitar] =
@@ -22,41 +21,76 @@ function App() {
   const [roleFilter, setRoleFilter] =
     useState("All");
 
-  const handleAddGuitar = (newGuitar) => {
-    setGuitars((currentGuitars) => [
-      ...currentGuitars,
-      newGuitar,
-    ]);
+  const handleAddGuitar = (guitar) => {
+    const guitarWithId = {
+      id: guitars.length + 1,
+      guitarModel: guitar.guitarModel,
+      bodyType: guitar.bodyType,
+      brandName: guitar.brandName,
+      stockQuantity: guitar.stockQuantity,
+      manufacturerName: guitar.manufacturerName,
+      userRole: guitar.userRole,
+    };
+
+    const updatedGuitars = [];
+
+    for (
+      let index = 0;
+      index < guitars.length;
+      index++
+    ) {
+      updatedGuitars.push(guitars[index]);
+    }
+
+    updatedGuitars.push(guitarWithId);
+
+    setGuitars(updatedGuitars);
   };
 
-  const handleSelectGuitar = (guitarId) => {
-    setSelectedId(guitarId);
+  const handleSelectGuitar = (guitar) => {
+    setSelectedGuitar(guitar);
   };
 
   useEffect(() => {
-    if (selectedId === null) {
-      setActiveGuitar(null);
-      return;
+    setActiveGuitar(selectedGuitar);
+  }, [selectedGuitar]);
+
+  const filteredGuitars = [];
+
+  if (roleFilter === "All") {
+    for (
+      let index = 0;
+      index < guitars.length;
+      index++
+    ) {
+      filteredGuitars.push(guitars[index]);
     }
-
-    const selectedGuitar = guitars.find(
-      (guitar) => guitar.id === selectedId
-    );
-
-    if (selectedGuitar) {
-      setActiveGuitar(selectedGuitar);
-    } else {
-      setActiveGuitar(null);
-    }
-  }, [selectedId, guitars]);
-
-  const filteredGuitars =
-    roleFilter === "All"
-      ? guitars
-      : guitars.filter(
-          (guitar) =>
-            guitar.userRole === roleFilter
+  } else {
+    for (
+      let index = 0;
+      index < guitars.length;
+      index++
+    ) {
+      if (
+        guitars[index].userRole ===
+        roleFilter
+      ) {
+        filteredGuitars.push(
+          guitars[index]
         );
+      }
+    }
+  }
+
+  const getFilterButtonClass = (
+    buttonName
+  ) => {
+    if (roleFilter === buttonName) {
+      return styles.activeFilter;
+    }
+
+    return styles.filterButton;
+  };
 
   return (
     <main className={styles.page}>
@@ -85,9 +119,15 @@ function App() {
         onAddGuitar={handleAddGuitar}
       />
 
-      <section className={styles.filterCard}>
+      <section
+        className={styles.filterCard}
+      >
         <div>
-          <span className={styles.filterLabel}>
+          <span
+            className={
+              styles.filterLabel
+            }
+          >
             INVENTORY FILTER
           </span>
 
@@ -99,14 +139,16 @@ function App() {
           </p>
         </div>
 
-        <div className={styles.filterButtons}>
+        <div
+          className={
+            styles.filterButtons
+          }
+        >
           <button
             type="button"
-            className={
-              roleFilter === "All"
-                ? styles.activeFilter
-                : styles.filterButton
-            }
+            className={getFilterButtonClass(
+              "All"
+            )}
             onClick={() =>
               setRoleFilter("All")
             }
@@ -116,11 +158,9 @@ function App() {
 
           <button
             type="button"
-            className={
-              roleFilter === "Merchant"
-                ? styles.activeFilter
-                : styles.filterButton
-            }
+            className={getFilterButtonClass(
+              "Merchant"
+            )}
             onClick={() =>
               setRoleFilter("Merchant")
             }
@@ -130,11 +170,9 @@ function App() {
 
           <button
             type="button"
-            className={
-              roleFilter === "Consumer"
-                ? styles.activeFilter
-                : styles.filterButton
-            }
+            className={getFilterButtonClass(
+              "Consumer"
+            )}
             onClick={() =>
               setRoleFilter("Consumer")
             }
@@ -144,28 +182,39 @@ function App() {
         </div>
       </section>
 
-      <div className={styles.resultSummary}>
+      <div
+        className={
+          styles.resultSummary
+        }
+      >
         Showing{" "}
         <strong>
           {filteredGuitars.length}
         </strong>{" "}
         of{" "}
-        <strong>{guitars.length}</strong>{" "}
-        guitar record
-        {guitars.length !== 1 ? "s" : ""}
+        <strong>
+          {guitars.length}
+        </strong>{" "}
+        guitar record(s)
       </div>
 
       <GuitarTable
         guitars={filteredGuitars}
-        selectedId={selectedId}
-        onSelectGuitar={handleSelectGuitar}
+        selectedGuitar={
+          selectedGuitar
+        }
+        onSelectGuitar={
+          handleSelectGuitar
+        }
       />
 
       <ActiveGuitar
         guitar={activeGuitar}
       />
 
-      <footer className={styles.footer}>
+      <footer
+        className={styles.footer}
+      >
         <strong>
           Guitar Store Inventory Manager
         </strong>
