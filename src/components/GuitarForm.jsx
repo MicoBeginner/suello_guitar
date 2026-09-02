@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./GuitarForm.module.css";
 
-function GuitarForm() {
+function GuitarForm({ onAddGuitar }) {
   const [formData, setFormData] = useState({
     guitarModel: "",
     bodyType: "",
@@ -23,35 +23,25 @@ function GuitarForm() {
       } else if (value.trim().length < 3) {
         error = "Guitar model must be at least 3 characters.";
       }
-    }
-
-    else if (name === "bodyType") {
+    } else if (name === "bodyType") {
       if (value === "") {
         error = "Please select a body type.";
       }
-    }
-
-    else if (name === "brandName") {
+    } else if (name === "brandName") {
       if (value.trim() === "") {
         error = "Brand name is required.";
       }
-    }
-
-    else if (name === "stockQuantity") {
+    } else if (name === "stockQuantity") {
       if (value === "") {
         error = "Stock quantity is required.";
       } else if (Number(value) < 1 || Number(value) > 100) {
         error = "Stock quantity must be between 1 and 100.";
       }
-    }
-
-    else if (name === "manufacturerName") {
+    } else if (name === "manufacturerName") {
       if (value.trim() === "") {
         error = "Manufacturer name is required.";
       }
-    }
-
-    else if (name === "userRole") {
+    } else if (name === "userRole") {
       if (value === "") {
         error = "Please select a user role.";
       }
@@ -77,37 +67,32 @@ function GuitarForm() {
   };
 
   const validateForm = () => {
-    const newErrors = {};
-
-    newErrors.guitarModel = validateField(
-      "guitarModel",
-      formData.guitarModel
-    );
-
-    newErrors.bodyType = validateField(
-      "bodyType",
-      formData.bodyType
-    );
-
-    newErrors.brandName = validateField(
-      "brandName",
-      formData.brandName
-    );
-
-    newErrors.stockQuantity = validateField(
-      "stockQuantity",
-      formData.stockQuantity
-    );
-
-    newErrors.manufacturerName = validateField(
-      "manufacturerName",
-      formData.manufacturerName
-    );
-
-    newErrors.userRole = validateField(
-      "userRole",
-      formData.userRole
-    );
+    const newErrors = {
+      guitarModel: validateField(
+        "guitarModel",
+        formData.guitarModel
+      ),
+      bodyType: validateField(
+        "bodyType",
+        formData.bodyType
+      ),
+      brandName: validateField(
+        "brandName",
+        formData.brandName
+      ),
+      stockQuantity: validateField(
+        "stockQuantity",
+        formData.stockQuantity
+      ),
+      manufacturerName: validateField(
+        "manufacturerName",
+        formData.manufacturerName
+      ),
+      userRole: validateField(
+        "userRole",
+        formData.userRole
+      ),
+    };
 
     setErrors(newErrors);
 
@@ -120,9 +105,32 @@ function GuitarForm() {
     event.preventDefault();
 
     if (validateForm()) {
+      const newGuitar = {
+        id: Date.now(),
+        guitarModel: formData.guitarModel,
+        bodyType: formData.bodyType,
+        brandName: formData.brandName,
+        stockQuantity: Number(formData.stockQuantity),
+        manufacturerName: formData.manufacturerName,
+        userRole: formData.userRole,
+      };
+
+      onAddGuitar(newGuitar);
+
       setSuccessMessage(
-        "Guitar information is valid and ready to register."
+        "Guitar registered successfully."
       );
+
+      setFormData({
+        guitarModel: "",
+        bodyType: "",
+        brandName: "",
+        stockQuantity: "",
+        manufacturerName: "",
+        userRole: "",
+      });
+
+      setErrors({});
     } else {
       setSuccessMessage("");
     }
@@ -148,8 +156,8 @@ function GuitarForm() {
 
           <input
             id="guitarModel"
-            type="text"
             name="guitarModel"
+            type="text"
             placeholder="Example: Stratocaster"
             value={formData.guitarModel}
             onChange={handleChange}
@@ -204,8 +212,8 @@ function GuitarForm() {
 
           <input
             id="brandName"
-            type="text"
             name="brandName"
+            type="text"
             placeholder="Example: Fender"
             value={formData.brandName}
             onChange={handleChange}
@@ -225,8 +233,8 @@ function GuitarForm() {
 
           <input
             id="stockQuantity"
-            type="number"
             name="stockQuantity"
+            type="number"
             min="1"
             max="100"
             placeholder="1 - 100"
@@ -248,8 +256,8 @@ function GuitarForm() {
 
           <input
             id="manufacturerName"
-            type="text"
             name="manufacturerName"
+            type="text"
             placeholder="Example: Fender Musical Instruments"
             value={formData.manufacturerName}
             onChange={handleChange}
@@ -271,7 +279,9 @@ function GuitarForm() {
                 type="radio"
                 name="userRole"
                 value="Merchant"
-                checked={formData.userRole === "Merchant"}
+                checked={
+                  formData.userRole === "Merchant"
+                }
                 onChange={handleChange}
               />
               Merchant
@@ -282,7 +292,9 @@ function GuitarForm() {
                 type="radio"
                 name="userRole"
                 value="Consumer"
-                checked={formData.userRole === "Consumer"}
+                checked={
+                  formData.userRole === "Consumer"
+                }
                 onChange={handleChange}
               />
               Consumer

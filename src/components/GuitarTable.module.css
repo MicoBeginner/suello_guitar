@@ -1,0 +1,160 @@
+.card {
+  width: 100%;
+  max-width: 1100px;
+  margin: 30px auto 0;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #ded8ce;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: #29231e;
+  color: #ffffff;
+}
+
+.header span {
+  color: #e7b76a;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.header h2 {
+  margin: 5px 0 0;
+}
+
+.count {
+  padding: 8px 12px;
+  background: #40372f;
+  color: #e7b76a;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 15px 18px;
+  text-align: left;
+  border-bottom: 1px solid #eee9e3;
+}
+
+.table th {
+  background: #faf8f5;
+  color: #6c6258;
+  font-size: 12px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.table td {
+  color: #342d27;
+  font-size: 14px;
+}
+
+.table tbody tr {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.table tbody tr:hover {
+  background: #fff7ed;
+}
+
+.selectedRow {
+  background: #f5e6d3 !important;
+}
+
+.pagination {
+  padding: 18px 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.pagination button {
+  padding: 9px 15px;
+  background: #a96f2d;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #8f5c24;
+}
+
+.pagination button:disabled {
+  background: #cfc7bd;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: #746a60;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.empty {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto 0;
+  padding: 30px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed #cfc7bd;
+  border-radius: 14px;
+}
+
+.empty h2 {
+  margin: 0 0 8px;
+  color: #29231e;
+}
+
+.empty p {
+  margin: 0;
+  color: #746a60;
+  font-size: 14px;
+}
+
+@media (max-width: 650px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px;
+    white-space: nowrap;
+  }
+
+  .pagination {
+    gap: 8px;
+  }
+
+  .pagination button {
+    padding: 8px 10px;
+  }
+}
