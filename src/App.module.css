@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  padding: 48px 20px 70px;
+  padding: 48px 20px 35px;
   background: #f5f1eb;
 }
 
@@ -42,9 +42,103 @@
   font-weight: bold;
 }
 
-@media (max-width: 650px) {
+.filterCard {
+  width: 100%;
+  max-width: 1100px;
+  margin: 28px auto 0;
+  padding: 22px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: #ffffff;
+  border: 1px solid #ded8ce;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.filterLabel {
+  color: #a96f2d;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.filterCard h2 {
+  margin: 5px 0;
+  color: #29231e;
+  font-size: 19px;
+}
+
+.filterCard p {
+  margin: 0;
+  color: #746a60;
+  font-size: 13px;
+}
+
+.filterButtons {
+  display: flex;
+  gap: 9px;
+}
+
+.filterButton,
+.activeFilter {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filterButton {
+  background: #f3eee7;
+  color: #65594d;
+  border: 1px solid #ded4c8;
+}
+
+.filterButton:hover {
+  background: #eadfce;
+}
+
+.activeFilter {
+  background: #a96f2d;
+  color: #ffffff;
+  border: 1px solid #a96f2d;
+}
+
+.resultSummary {
+  width: 100%;
+  max-width: 1100px;
+  margin: 13px auto -15px;
+  color: #746a60;
+  font-size: 12px;
+  text-align: right;
+}
+
+.resultSummary strong {
+  color: #a96f2d;
+}
+
+.footer {
+  width: 100%;
+  max-width: 1100px;
+  margin: 35px auto 0;
+  padding: 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #d8d0c7;
+  color: #84786d;
+  font-size: 12px;
+}
+
+.footer strong {
+  color: #51483f;
+}
+
+@media (max-width: 700px) {
   .page {
-    padding: 30px 14px 50px;
+    padding: 30px 14px;
   }
 
   .hero {
@@ -57,5 +151,33 @@
 
   .badge {
     display: none;
+  }
+
+  .filterCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filterButtons {
+    width: 100%;
+  }
+
+  .filterButton,
+  .activeFilter {
+    flex: 1;
+  }
+
+  .resultSummary {
+    text-align: left;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 430px) {
+  .filterButtons {
+    flex-direction: column;
   }
 }
